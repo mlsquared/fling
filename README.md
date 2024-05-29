@@ -11,8 +11,9 @@ Compile this into a pdf using
 
 >  It just works except when it shouldn't.
 
-Fling enables one device to "fling" a URL to a media device for playback.
-It feels like Airplay and Chromecast, but it does what they don't do.
+Fling enables one device to "fling" a URL to a TV (or other media
+device) for playback.  It feels like Airplay and Chromecast, but it
+does what they don't do.
 
 > It just works
 
@@ -25,37 +26,44 @@ Even if the mobile device is any phone that at least provides web browsing
 capabilities with a web browser that is reasonably compatible with 
 modern browsers, or provides a sufficiently similar app development environment.
 
-Even if the user "flinging" has no account or prior affiliation with the receiving
-media device.
+Even if the user "flinging" has no account or prior affiliation with
+the receiving media device.
 
 For flinging from a web page, it works even if the user has not installed any
-application that is fling-enabled.  It only requires javascript.
+application that is fling-enabled.  Fling only requires javascript.
 
 Further, it doesn't require the user to enter a short code or scan a QR code.
 And it doesn't realy on access to microphones or cameras.
 
 > Except when it shouldn't
 
-It won't work if the mobile device is not in physical proximity to the media
-device.
+Bob's neighbor cannot fling porn to Bob's 5 year old daughter watching TV.
 
-It won't work if the mobile device is in a different room such that there is
+Bob's college frenemy down the hall in their dorm cannot fling porn to
+Bob's TV even though they are both in the same building using the same
+wifi network.
+
+More specifically, Fling won't work if the mobile device is not in
+physical proximity to the media device.
+
+Fling won't work if the mobile device is in a different room such that there is
 an intervening wall.
 
+Unless... the media device's owner has allowed policy exceptions to
+the above requirements.
 
 
 ## How does it work?!?
 
-From the Joe User's perspective.  Joe walks into Bob's house.  Joe
-asks if he can fling a video to Bob's TV.  Joe's old iPhone 8 is not
-on Bob's wifi network and is using only cellular data.  Joe opens a
-youtube page in the phone's Safari browser.  A button appears beneath
-the video, perhaps alongside the button for casting or airplaying.
-Joe pushes this button and it opens an iframe, frame, or web page
-showing the video to be flung, a list of detected media devices if
-more than one is nearby or the name of the device if there is only
-one, and lastly a "fling" button.  Joe pushes "fling" and the video
-starts playing on Bob's TV.
+From Joe User's perspective.  Joe walks into Bob's house.  Joe's old
+iPhone 8 is not on Bob's wifi network and is using only cellular data.
+Joe opens a youtube page in the phone's Safari browser.  A button
+appears beneath the video, perhaps alongside the button for casting or
+airplaying.  Joe pushes this button and it opens an iframe, frame, or
+web page showing the video to be flung, a list of detected media
+devices if more than one is nearby or the name of the device if there
+is only one, and lastly a "fling" button.  Joe pushes "fling" and the
+video starts playing on Bob's TV.
 
 Joe User didn't have to join Bob's wifi network.  Joe User didn't have
 to join any wifi network.  Joe User didn't have to upgrade his phone.
@@ -121,6 +129,35 @@ or a Distributed Hash Table (DHT) node.  The server or DHT node could act
 as the relay for further communications between Joe's cell phone and Bob's TV.
 Once communications is established via the relay, Joe's can communicate at
 higher bitrate to Bob's TV in order to make API calls such as "play this URL."
+
+## Promiscuous Services
+
+SRS is promiscuous.  *Fling* is a double entendre in the same mode.
+
+SRS is promiscuous in that makes services available with zero prior
+affiliation the service and the requstor and it does so without
+requiring any exchange of any form of identification.  This does not
+make sense for many types of services, but it does not have to.  Do
+not use promiscuous services if they are inappropriate.  Promiscuous
+services may be promiscuous, but this does not imply lack of consent.
+The device offering the service does so intentionally.  The device
+communicating with the service does so intentionally.
+
+This does not mean that the two parties consent without information.
+Promiscuous services may still make decisions based on policy.  Policy
+decisions may be made based on policy inputs that are inferred rather
+than explicitly provided by the user.  Such policy inputs may include
+inferring proximity between the two parties, or inferring relative
+location or inferring the presence of intervening walls.
+
+
+The proxies require
+some means for inferring said proxies.  We could use a camera or
+microphone to enable proximity detection, but cameras and microphones
+are often deemed as too intrusive.  For Sandbox Reachable Services
+we rely on EM emissions that are normally generated by mobile devices
+in order to enable communications without requiring the mobile device
+to join the same network as the media device.
 
 
 ## Terminology
