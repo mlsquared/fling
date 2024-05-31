@@ -9,13 +9,13 @@ Compile this into a pdf using
 # Fling
 
 
->  It just works except when it shouldn't.
+>  It just works...except when it shouldn't.
 
 Fling enables one device to "fling" a URL to a TV (or other media
 device) for playback.  It feels like Airplay and Chromecast, but it
 does what they don't do.
 
-> It just works
+> It just works...
 
 Even if the mobile device and the network device are on different networks.
 
@@ -35,7 +35,7 @@ application that is fling-enabled.  Fling only requires javascript.
 Further, it doesn't require the user to enter a short code or scan a QR code.
 And it doesn't realy on access to microphones or cameras.
 
-> Except when it shouldn't
+> ...except when it shouldn't
 
 Bob's neighbor cannot fling porn to Bob's 5 year old daughter watching TV.
 
@@ -91,6 +91,8 @@ benefit over Airplay or Chromecast.
 
 Fling 1 made it onto all Vizio TVs, because AirPlay and Chromecast did
 not exist when Fling was first introduced.
+
+David Harrison holds several patents for sandbox reachable services.
 
 ## Sandbox-Reachable Services 2
 
