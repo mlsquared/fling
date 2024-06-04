@@ -3,7 +3,7 @@ This is homework for preparing for work on fling.
 
 Compile this into a pdf using
 
-  $ pandoc README.md -o READMER.pdf --pdf-engine=xelatex
+  $ pandoc hw1.md -o hw1.pdf --pdf-engine=xelatex
 
 -->
 
@@ -35,7 +35,7 @@ IP header?
 
 1.6. Why do we use both Ethernet addresses and IP addresses?
 
-1.7. What is a Internet router?  What are some key differences between a 
+1.7. What is an Internet router?  What are some key differences between a 
 router and a switch?
 
 1.8. In the TCP/IP model, what layer is TCP?
