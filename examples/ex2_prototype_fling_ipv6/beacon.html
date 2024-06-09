@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sandboxed Inititator Beacon</title>
+</head>
+<body>
+    <p> I assume that this web page would be loaded from a web page 
+        that desires to communicate with a node in the network.
+        Or we could provide embed code that someone can cut-and-paste
+        into a web page to "fling-enable it."   This code is ONLY a
+        sandboxed initiator beacon that uses IPv6.
+    </p>
+
+    <p> The button below will send a session ID using a side channel. </p>
+
+    <pre> 
+    NetRange:       2620:38:C000:: - 2620:38:C000:FFFF:FFFF:FFFF:FFFF:FFFF
+    CIDR:           2620:38:C000::/48
+    NetName:        OLEMISS
+    </pre>
+
+    I arbitrarily chose F1E2:D3C4 to identify the <i>session initiator 
+    beacon,</i> hereafter referred to as the <i>beacon</i>.  This number 
+    is appended to the network prefix for Ole Miss.  Thus all beacons 
+    begin with 2620:38:C000:F1E2:D3C4.  128-80 = 48 bits remain to 
+    communicate a session id.
+
+    Unfortunately, I don't see how this would work on an IPv4 network.
+    Thoughts?
+
+    <button id="BeaconButton">beacon</button>
+    <script>
+
+        function generateSessionID() {
+            // Generate two 24-bit numbers and combine them into a 48-bit number
+            const upper = Math.floor(Math.random() * 0x1000000); // 24-bit 
+            const lower = Math.floor(Math.random() * 0x1000000); // 24-bit 
+
+            // Combine the two 24-bit numbers into a 48-bit number
+            const sessID = (upper * 0x1000000) + lower;
+
+            return sessID;
+        }
+
+        function generateSessionIDStr() {
+            number = generateSessionID()
+            // Convert the 48-bit number to a hexadecimal string
+            let hexString = number.toString(16).padStart(12, '0'); 
+    
+            // Split the hex string into three 4-digit segments
+            let part1 = hexString.slice(0, 4);
+            let part2 = hexString.slice(4, 8);
+            let part3 = hexString.slice(8, 12);
+
+            // Combine the segments into the IPv6 notation
+            let sessIDStr = `${part1}:${part2}:${part3}`;
+            return sessIDStr;
+        }
+
+        document.getElementById('BeaconButton').addEventListener('click', () => {
+            const url = window.location.href;
+            const sessionID = generateSessionIDStr();
+            const targetIPv6 = `http://[2620:38:C000:F1E2:D3C4:${sessionID}]:80`; // Example IPv6 address with sessionID
+
+            fetch(targetIPv6)
+                .then(response => console.log('Request sent to', targetIPv6))
+                .catch(error => console.log('Error:', error));
+        });
+    </script>
+</body>
+</html>
+
