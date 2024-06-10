@@ -12,6 +12,26 @@
     into a web page to "fling-enable it."  This code is ONLY a
     sandboxed initiator beacon that uses TCP SYNs.
   </p>
+
+  <p>
+    You can open this web page in a browser reading for your local
+    file system or host it on an arbitrary website.  Where it is hosted
+    shouldn't matter, it will generate packets destined to flingo.zapto.org.
+    flingo.zapto.org is a test domain used as the destination for 
+    our side-channel.  It does not even matter that flingo.zapto.org
+    is in a different domain and thus appears to violate same-origin policy.
+    Modern browsers would send a request using CORS headers or send a 
+    pre-flight request in order to confirm that cross-site scripting should
+    be allowed.  However, CORS may be inconsequential because the very first
+    packet communicated in any TCP connection is a TCP SYN, and this is
+    true even if the first request is a CORS pre-flight request.  With 
+    SSL/TLS, the TCP header is not encrypted, so even if all communications
+    between the browser and the server are subjected to end-to-end encryption
+    using SSL/TLS, the TCP header in the SYN packet is visible and 
+    manipulation of the fields in the TCP header can be used as a side-channel
+    to devices in the same network as the device running the browser
+    rendering this web page. 
+  </p>
     
   <p>
     This page encodes the session ID as a set of 3 port numbers.  If
