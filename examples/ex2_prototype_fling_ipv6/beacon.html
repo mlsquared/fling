@@ -4,14 +4,15 @@
     <title>Sandboxed Inititator Beacon based on embedding session IDs in IPv6 Addresses</title>
 </head>
 <body>
-    <p> I assume that this web page would be loaded from a web page 
-        that desires to communicate with a node in the same network.
-        Or we could provide embed code that someone can cut-and-paste
-        into a web page to "fling-enable it."   This code is ONLY a
-        sandboxed initiator beacon that uses IPv6.
-    </p>
+  <p>
+    I assume that this web page would be loaded from a web page that
+    desires to communicate with a node in the same network.  Or we
+    could provide embed code that someone can cut-and-paste into a web
+    page to "fling-enable it."  This code is ONLY a sandboxed
+    initiator beacon that uses IPv6.
+  </p>
 
-    <p> The button below will send a session ID using a side channel. </p>
+  <p> The button below will send a session ID using a side channel. </p>
 
     <pre> 
     NetRange:       2620:38:C000:: - 2620:38:C000:FFFF:FFFF:FFFF:FFFF:FFFF
@@ -19,15 +20,29 @@
     NetName:        OLEMISS
     </pre>
 
+  <p>
     I arbitrarily chose F1E2:D3C4 to identify the <i>session initiator 
     beacon,</i> hereafter referred to as the <i>beacon</i>.  This number 
     is appended to the network prefix for Ole Miss.  Thus all beacons 
     begin with 2620:38:C000:F1E2:D3C4.  128-80 = 48 bits remain to 
     communicate a session id.
+  </p>
 
+  <p>
+    This example is incomplete.  I didn't build an unsandboxed beacon
+    detector for session IDs embedded inside IPv6 addresses.  I also
+    provide no backend to act as a relay to establish communications
+    between the sandboxed application running in the mobile device nor
+    does there exist an unsandboxed beacon detector and nor does their
+    exist an application on the media device running a jukebox.
+  </p>
+  
+  <p>
     Unfortunately, I don't see how this would work on an IPv4 network.
     Thoughts?
+  </p>
 
+  
     <button id="BeaconButton">beacon</button>
     <script>
 
