@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sandboxed Inititator Beacon based on embedding session ID in port numbers</title>
+</head>
+<body>
+
+  <p>
+    I assume that this web page would be loaded from a web page 
+    that desires to communicate with a node in the same network.
+    Or we could provide embed code that someone can cut-and-paste
+    into a web page to "fling-enable it."  This code is ONLY a
+    sandboxed initiator beacon that uses TCP SYNs.
+  </p>
+    
+  <p>
+    This page encodes the session ID as a set of 3 port numbers.  If
+    we used only 1 port number, we would only be able to generate
+    2**16-1024 unique session IDs.  The reduction by 1024 takes into
+    account the well known port numbers from 0 to 1023 inclusive,
+    which would likely be blocked by some if not all major browsers.
+    If we use 3 port numbers with replacement then we could generate
+    (2**16-1024)**3 distinct triplets.  However, to ensure that order
+    is retained we would need to pause between each fetch, and there
+    is still a possibility that the port numbers would be reordered.
+    Furthermore, if we want to send a port number more than once to
+    make it easier for the unsandboxed beacon detector (a.k.a., beacon
+    detector) to read the number then we should send three distinct
+    unique numbers and do it in a manner where order does not matter,
+    e.g., we could sort the numbers from smallest to largest to create
+    the session ID.
+  </p>
+
+  <p>
+    For example, we could choose 3 16-bit values greater than 1023.
+    If I understand correctly this would be the same as
+    math.comb(2**16-1024, 3) possible session IDs which results in
+    math.log(math.comb(2**16-1024, 3),2) possible session IDs
+    expressed as a power of 2, i.e., the number of bits of session ID
+    is approximately 45.3.  This is a little shy of the number of bits
+    in Ethernet addresses, and would probably be large
+    enough to avoid almost all collisions between two mobile devices
+    trying to beacon at the same time.
+  </p>
+
+  <button id="beaconButton">beacon</button>
+
+<script>
+function generatePorts() {
+    const minPort = 1025;
+    const maxPort = 65535;
+    let ports = new Set();
+    while (ports.size < 3) {
+        let port = Math.floor(Math.random() * (maxPort - minPort + 1)) + minPort;
+        ports.add(port);
+    }
+    return Array.from(ports).sort((a, b) => a - b);
+}
+
+function initiatorBeacon() {
+
+    const ports = generatePorts();
+    console.log('Generated ports:', ports);
+    ports.forEach(port => {
+        // Send multiple SYN requests to each port
+        fetch(`https://flingo.zapto.org:${port}/beacon`, { method: 'GET' })
+        .then(response => console.log(`Request sent to port ${port}`))
+        .catch(error => console.error(`Error on port ${port}:`, error));
+    });
+}
+
+document.getElementById('beaconButton').addEventListener('click', initiatorBeacon);
+</script>
+    
+</body>
+</html>
