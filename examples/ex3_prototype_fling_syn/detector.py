@@ -1,7 +1,21 @@
 """This is an example unsandboxed beacon detector.  It runs on the media
 device and sniffs TCP traffic.
 
+Note that this unsandboxed beacon detector (unbeacon) is incomplete. It does not
+deal with encrypted wifi networks, and this script does not put the
+wireless network interface in monitor mode (e.g., in Mac OS).  
+When a wifi network is encrypted, the station and the access point
+will share a key called a Pairwise Transient Key (PTK) which is unique
+to the station-AP pair.   As such the beacon detector will NOT be able
+to see IP or TCP headers in packets communicated between the station and
+the AP.   If we want this unbeacon to work on an encrypted wifi network, the 
+unbeacon would need to capture the 4-way handshake
+when the station first joins the wifi network.  This 4-way handshake
+includes enough information to compute the PTK if the unbeacon 
+also knows the wifi network's Pre-Shared Key (PSK).  
 """
+
+
 # This requires using scapy: 
 #
 #   pip install scapy

@@ -6,6 +6,27 @@
 <body>
 
   <p>
+    <i> WARNING: I tried using port numbers as a side channel, but I now
+    understand that this is not a viable mechanism in Wi-Fi networks
+    because port numbers are encrypted and thus not visible to a
+    beacon detector. When a node (a.k.a., a station) joins a Wi-Fi
+    network, it performs a four-way handshake with the access point
+    (AP). The station has a Pre-Shared Key (PSK), which is part of the
+    network configuration and is known by all nodes in the Wi-Fi
+    network a priori. During the four-way handshake, a session key
+    called the Pairwise Transient Key (PTK) is created. This PTK is
+    used to encrypt unicast traffic between a specific station and the
+    AP. Even if the beacon detector knows the PSK, it must capture the
+    four-way handshake to obtain the PTK. Since a mobile device may
+    move around within a Wi-Fi network, the four-way handshake may not
+    take place when the mobile device is near the beacon
+    detector. Thus, relying on port numbers as a side channel would
+    not be reliable. However, port numbers could potentially be used
+    as an optimization when the four-way handshake is detected, but
+    this approach has significant limitations.</i>
+  </p>
+  
+  <p>
     I assume that this web page would be loaded from a web page 
     that desires to communicate with a node in the same network.
     Or we could provide embed code that someone can cut-and-paste
@@ -67,7 +88,7 @@
 
 <script>
 function generatePorts() {
-    const minPort = 1025;
+    const minPort = 1024;
     const maxPort = 65535;
     let ports = new Set();
     while (ports.size < 3) {
