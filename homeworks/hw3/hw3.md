@@ -4,6 +4,12 @@ header-includes:
   - "\\usepackage{graphicx}"
 ---
 
+<!--
+Compile this into a pdf using
+
+  $ pandoc hw3.md -o hw3.pdf --pdf-engine=xelatex
+-->
+
 # Homework 3
 
 
@@ -183,13 +189,13 @@ Convert the following numbers from hexadecimal to decimal:
 ## IP v6 Addresses
 
 IPv6 addresses are represented as hexadecimal with each 4
-hedecimal digits separated by a colon.  Each 4 hexadecimal number
+hexadecimal digits separated by a colon.  Each 4 hexadecimal number
 corresponds to a 2 byte unsigned integer (i.e., an unsigned short).
 Double colon means that 1 or more consecutive shorts are 0.
 For all IP addresses, the most significant bits (the leftmost bits)
 correspond to a portion of the Internet.  Often times a range of IP addresses
 corresponds to an ISP, a large corporation, or a campus.  For example,
-Ole Miss is allocated all IPv6 addresses a range
+Ole Miss is allocated all IPv6 addresses in a range
 
     NetRange:       2620:38:C000:: - 2620:38:C000:FFFF:FFFF:FFFF:FFFF:FFFF
     CIDR:           2620:38:C000::/48
