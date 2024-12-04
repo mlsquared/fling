@@ -1,7 +1,6 @@
-//packet lentgh modulation in traffic at weir hall (10 minutes)
-//Before the shortcode is sent, the signal packet (61 bytes) is sent
-//Then, 32 bit long short code modulated into 8 packets plus 8-bit long CRC-8 modulated into 2 packets is sent
-
+// packet2.cc
+//signal packet (62 bytes) + 8 packets of shortcode + 2 packets of CRC-8
+//traffic at weir hall
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"

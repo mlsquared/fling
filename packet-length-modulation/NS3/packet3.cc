@@ -1,6 +1,5 @@
-//similarly to packet2.cc, the modulated shortcode is sent and transmitted.
-//the traffic is 40 minutes of combined data from weir, union, library, and walking around campus with hotspot
-//the crc-8 results is in shortcode-results/combined_decoded_results_summary.txt (ran 10 times)
+//packet length modulation in combine traffic
+//ran for 40 minutes
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"

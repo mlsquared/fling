@@ -1,5 +1,5 @@
-//packet length modulation without any traffic
-//32 bit long short code into 8 packets, plus 2 packets of CSC-8
+//packet length modulation without traffic
+//32 bit short code into 8 packets with CSC-8
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
