@@ -389,18 +389,18 @@ PacketLengthModulation::PacketLengthModulation()
     }
 }
 
-// PacketLengthModulation::~PacketLengthModulation()
-// {
-//     if (decodedStream.is_open())
-//     {
-//         decodedStream << "Total Codes Sent: " << totalCodesSent << std::endl;
-//         decodedStream << "Total Codes Received: " << totalCodesReceived << std::endl;
-//         decodedStream << "Total CRC Passed: " << totalCrcPassed << std::endl;
-//         decodedStream << "Total CRC Failed: " << totalCrcFailed << std::endl;
-//         decodedStream.close();
-//     }
-//     m_socket = 0;
-// }
+PacketLengthModulation::~PacketLengthModulation()
+{
+    if (decodedStream.is_open())
+    {
+        decodedStream << "Total Codes Sent: " << totalCodesSent << std::endl;
+        decodedStream << "Total Codes Received: " << totalCodesReceived << std::endl;
+        decodedStream << "Total CRC Passed: " << totalCrcPassed << std::endl;
+        decodedStream << "Total CRC Failed: " << totalCrcFailed << std::endl;
+        decodedStream.close();
+    }
+    m_socket = 0;
+}
 
 void
 PacketLengthModulation::Setup(Address address, double codeIntervalSeconds)
