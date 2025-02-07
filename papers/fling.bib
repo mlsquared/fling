@@ -2,34 +2,35 @@
 
 % Example entries:
 %
-% @article{lamport1994,
-%   author    = {Leslie Lamport},
-%   title     = {LaTeX: A Document Preparation System},
-%   journal   = {Software: Practice and Experience},
-%   year      = {1994},
-%   volume    = {15},
-%   number    = {3},
-%   pages     = {1--23}
-% }
-%
-% @inproceedings{smith2020,
-%   author    = {John Smith and Jane Doe},
-%   title     = {Title of the Conference Paper},
-%   booktitle = {Proceedings of the XYZ Conference},
-%   year      = {2020},
-%   editor    = {A. Editor and B. Editor},
-%   volume    = {10},
-%   number    = {1},
-%   series    = {Lecture Notes in Computer Science},
-%   pages     = {100--110},
-%   address   = {City, Country},
-%   month     = {July},
-%   organization = {Conference Organization},
-%   publisher = {Springer},
-%   note      = {Best Paper Award},
-%   doi       = {10.1000/xyz123},
-%   url       = {https://www.example.com}
-% }
+@comment{@article{lamport1994,
+  author    = {Leslie Lamport},
+  title     = {LaTeX: A Document Preparation System},
+  journal   = {Software: Practice and Experience},
+  year      = {1994},
+  volume    = {15},
+  number    = {3},
+  pages     = {1--23}
+}}
+
+@comment{@inproceedings{smith2020,
+  author    = {John Smith and Jane Doe},
+  title     = {Title of the Conference Paper},
+  booktitle = {Proceedings of the XYZ Conference},
+  year      = {2020},
+  editor    = {A. Editor and B. Editor},
+  volume    = {10},
+  number    = {1},
+  series    = {Lecture Notes in Computer Science},
+  pages     = {100--110},
+  address   = {City, Country},
+  month     = {July},
+  organization = {Conference Organization},
+  publisher = {Springer},
+  note      = {Best Paper Award},
+  doi       = {10.1000/xyz123},
+  url       = {https://www.example.com}
+}}
+% end examples.
 
 
 @article{Holden_2022,
@@ -39,7 +40,398 @@
   journal={Journal of Navigation},
   volume={75},
   number={4},
-  pages={946–965}
+  pages={946–965},
   year={2022},
 }
 
+% Deals with gestures from anywhere wihtin a building.
+%
+% uses the Doppler shift in Wi-Fi signals to detect whole body movements which can
+% then be interpreted as gestures.  This used a single device with four antennas and
+%
+% 0.5 m/sec gesture results in a 17 Hz Doppler shift on a 5 GHz Wi-Fi transmission.
+% a few Hz from 20MHz Wi-Fi signal.
+
+% Contributions:
+%
+%  * first wireless system that enables gesture recognition in line-of-sight,
+%    non-line-of-sight, and through-the-wall scenarios.
+%  * presents algorithms to extract gesture information from communication-based wireless
+%    signals. Specifically, we show how to extract minute Doppler shifts from wide-
+%    band OFDM transmissions that are typical to most modern communication systems
+%    including Wi-Fi.
+%  * use a proof-of-concept prototype, we demonstrate that our system can detect a set
+%    of nine whole-body gestures in typical environments
+%
+% To reduce false positives, required a preamble.
+%
+% Did not look at positioning within the home or building.   Focused on whole building
+% gestures.
+%
+% 684 citations as of Jan 29, 2024
+@inproceedings{Pu2013_WiSee,
+author = {Pu, Qifan and Gupta, Sidhant and Gollakota, Shyamnath and Patel, Shwetak},
+title = {Whole-home gesture recognition using wireless signals},
+year = {2013},
+isbn = {9781450319997},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.umiss.idm.oclc.org/10.1145/2500423.2500436},
+doi = {10.1145/2500423.2500436},
+abstract = {This paper presents WiSee, a novel gesture recognition system that leverages wireless signals (e.g., Wi-Fi) to enable whole-home sensing and recognition of human gestures. Since wireless signals do not require line-of-sight and can traverse through walls, WiSee can enable whole-home gesture recognition using few wireless sources. Further, it achieves this goal without requiring instrumentation of the human body with sensing devices. We implement a proof-of-concept prototype of WiSee using USRP-N210s and evaluate it in both an office environment and a two- bedroom apartment. Our results show that WiSee can identify and classify a set of nine gestures with an average accuracy of 94\%.},
+booktitle = {Proceedings of the 19th Annual International Conference on Mobile Computing \& Networking},
+pages = {27–38},
+numpages = {12},
+keywords = {wireless sensing, whole-home interaction, gesture recognition},
+location = {Miami, Florida, USA},
+series = {MobiCom '13}
+}
+
+
+% Papers to look at
+%
+%  * Pu_WiSee says "Prior work on localization uas a variety of techniques, [..] RSSI [6]" 
+%    [6] K. Chintalapudi, A. Iyer, and V. Padmanaban. Indoor Localization without the Pain.
+%        In NSDI, 2011.
+%
+%  * Pu_WiSee says, "localize wireless devices [...] fine-grained OFDM channel information [21]"
+%    [21] S. Sen, B. Radunovic, R. R. Choudhury, and T. Minka.
+%     Spot localization using PHY layer information . In Mobisys, 2012.
+
+%
+% 63% of people find connected devices "creepy"
+% 50% of people know how to disable data collection
+% 75% of people distrust the way data is shared
+% 28% of people who do not own a smart device, will not buy one due to security concerns
+% 77% availability of privacy and security information is part of their purchase decision
+%
+% Where does responsibility lie?
+% percentage of consumers who agreed with each statement in relation to buying
+% a connected device
+%  * 80% the connected device is made by a brand I trust
+%  * 67% the connected device has a label, sticker, or mark that certifies it is
+%        privacy-protecting and secure.
+%  * 88% there should be legal privacy and security standards that manufacturers need
+%        to comply with
+%  * 81% manufacturers should only make connected devices that protect privacy and security
+%  * 80% retailers should ensre that the connected devices they sell have good privacy and
+%        security when using connected devices
+%
+% ISOC established the Online Trust Alliance (OTA) to create a safer and most trustworthy
+%   connected world
+%
+% Internet Society. (2019). Trust opportunity – Exploring consumer attitudes to IoT.
+% Internet Society. Retrieved from
+% https://www.internetsociety.org/resources/doc/2019/trust-opportunity-exploring-consumer-attitudes-to-iot/
+@techreport{ISoc2019,
+  title        = {The Trust Opportunity: Exploring Consumer Attitudes to the Internet of Things},
+  institution  = {Internet Society},
+  author       = {Internet Society},
+  year         = 2019,
+  url          = {https://www.internetsociety.org/resources/doc/2019/trust-opportunity-exploring-consumer-attitudes-to-iot/}
+}
+
+
+% 2020_Haney_NIST
+% https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=929479&utm_source=chatgpt.com
+%
+@inproceedings{Haney2020,
+  author    = {Haney, Julie M. and Furman, Susanne M. and Acar, Yasemin},
+  title     = {Smart Home Security and Privacy Mitigations: Consumer Perceptions, Practices, and Challenges},
+  booktitle = {International Conference on Human-Computer Interaction},
+  year      = {2020},
+  address   = {Copenhagen, Denmark},
+  url       = {https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=929479},
+}
+
+
+% "[...] 62 percent are concerned about their cameras being hacked"
+@misc{mortgagecadence2022,
+  title        = {Smart Tech in the American Home: Distrust or Trust?},
+  author       = {Mortgage Cadence},
+  year         = 2022,
+  url          = {https://www.mortgagecadence.com/blog/tech-in-the-home/}
+}
+
+
+
+% Gesture based history:
+%  - Google: "How to use gesture to find the tv remote" (Uh-oh?  Hallucination?)
+%
+%    To use gesture to find a TV remote, most modern smart TVs with built-in cameras allow
+%    you to activate a "Find Remote" feature through hand gestures, where you simply wave
+%    your hand in front of the TV screen after enabling the gesture control setting in your
+%    TV menu, which will then trigger the remote to emit a sound signal,
+%    [...[
+%    Hand movement:
+%
+%      Tpically, a simple waving motion with your hand in front of the TV will trigger
+%      the "Find Remote" function.
+%
+%    It turns out this may be an hallucination.   It included three references.   There was
+%    a reference about waving to the TV as part of gestures to control a TV.  There was
+%    a reference about finding a remote.   There was no reference that combined them.
+%
+%  - ChatGPT thinks there has been no proposal in academic publications for a gesture
+%    to "find the remote control."
+%  - Duck-duck-go search for "gesture to find the TV remote control"
+%    returns many responses related to finding or replcing a remote control or
+%    gestures to control a TV, but
+%
+% The problem is recognized:
+%  - Alexa, "Find my remote" using voice.
+%  - Roku "Remote Finder" on TV remote mobile app
+%
+% Roku Remote Pro:
+%  "Heh Roku, where is my remote"
+
+% Saumsung first introduced gesture-based input on Samsung TVs at CES 2012.
+@misc{Engadget2012,
+  author    = {Engadget Staff},
+  title     = {Samsung Smart Interaction Gesture-Controlled HDTV Demo},
+  year      = {2012},
+  url       = {https://www.engadget.com/2012-01-11-samsung-smart-interaction-gesture-controlled-hdtv-demo-video.html},
+  note      = {First publicly available report of Samsung's gesture-controlled TV system; no peer-reviewed sources available. Accessed: 2025-01-27}
+}
+
+@misc{RokuVoiceRemotePro,
+  author = {{Roku, Inc.}},
+  title = {Roku Voice Remote Pro - Hands-free Voice Control and Remote Finder},
+  year = {2024},
+  url = {https://www.roku.com/products/accessories/roku-voice-remote-pro},
+  note = {Accessed: 2025-01-27}
+}
+
+
+% Talksabout
+@misc{CNET2015_Roku4,
+  author = {David Katzmaier},
+  title = {Roku 4 Review: Great 4K Streamer, but Not the Best},
+  year = {2015},
+  url = {https://www.cnet.com/reviews/roku-4-review/},
+  note = {Accessed: 2025-01-27}
+}
+
+% "New premium Alexa Voice Remote Pro introduces Fire TV’s first-ever Remote Finder feature,"
+@misc{Amazon2022_FindMyRemote,
+  author       = {Amazon2022},
+  title        = {Amazon Upgrades Fire TV with Third-Generation Fire TV Cube and New Alexa Voice Remote Pro},
+  year         = {2022},
+  month        = {September},
+  url          = {https://press.aboutamazon.com/2022/9/amazon-upgrades-fire-tv-with-third-generation-fire-tv-cube-and-new-alexa-voice-remote-pro},
+  note         = {Accessed: 2025-01-27}
+}
+
+
+
+% Hand-gestures effectiveness.
+% (HEREDAVE I need to read this)
+% Filename: 2015-Zaiti-Ubiquitous-hand_gestures.pdf
+@article{Zaiti2015,
+  author    = {Iulia Andreea Zaiţi and Ştefan Gheorghe Pentiuc and Radu-Daniel Vatavu},
+  title     = {On free-hand TV control: experimental results on user-elicited gestures with Leap Motion},
+  journal   = {Personal and Ubiquitous Computing},
+  volume    = {19},
+  number    = {5-6},
+  pages     = {821--838},
+  year      = {2015},
+  publisher = {Springer},
+  doi       = {10.1007/s00779-015-0863-y}
+}
+
+
+% I am thinking of including this in the proposal, but I need to read it more carefully.
+% [HEREDAVE]
+% Filename: 2012-Babeth-EuroTV_gestures_older_adults.pdf
+@inproceedings{Bobeth2012_gestures_older_adults,
+  author = {Bobeth, Jan and Schmehl, Susanne and Kruijff, Ernst and Deutsch, Stephanie and Tscheligi, Manfred},
+  title = {Evaluating performance and acceptance of older adults using freehand gestures for TV menu control},
+  year = {2012},
+  isbn = {9781450311076},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/2325616.2325625},
+  doi = {10.1145/2325616.2325625},
+  abstract = {In this paper, we explore alternative TV menu control methods, focusing specifically on older users. We investigated performance and acceptance of freehand gestures by implementing several techniques and conducting a user study with 24 older adults. We expected that older adults would like gesture techniques as they are generally fun to use and easy to conduct. As a possible alternative to physical remote control, gesture techniques may also introduce some physical activity for older adults (positive health effects). In the user study, we compared four different kinds of freehand gesture interaction to control a corresponding TV menu, investigating specifically on abilities of older adults. Each of the interaction types was analyzed regarding task completion time, error rate, usability and acceptance. Results showed that directly transferring tracked hand movements to control a cursor on a TV achieved the best performance and was preferred by the users. In general, the participating older adults showed a very positive attitude towards gesture-based interactions.},
+  booktitle = {Proceedings of the 10th European Conference on Interactive TV and Video},
+  pages = {35–44},
+  numpages = {10},
+  keywords = {older adults, freehand gestures, TV control},
+  location = {Berlin, Germany},
+  series = {EuroITV '12}
+}
+
+
+
+
+% One of the earliest attempts I could find for using computer vision to recognize hand
+% gestures.
+%
+% citations: 201
+% Patents: 8
+%
+% filename: 1993-Darrell-CVPR-Space_Time_Gestures.pdf
+%
+% Based on earlier technical report:
+%   Darrell, T. and Pentland, A. P., "Recognition of Space-Time Gestures usin a Distributed
+%   Representation", (1992) MIT Media Laboratory Perceptual Computing Group TR-197.
+%
+@INPROCEEDINGS{1993-Darrell-CVPR_Space_Time_Gestures,
+  author={Darrell, T. and Pentland, A.},
+  booktitle={Proceedings of IEEE Conference on Computer Vision and Pattern Recognition}, 
+  title={Space-time gestures}, 
+  year={1993},
+  volume={},
+  number={},
+  pages={335-340},
+  keywords={Humans;Pattern recognition;Pattern matching;Statistics;Laboratories;Hardware;Predictive models;Magnetic heads;Eyes;Machine vision},
+  doi={10.1109/CVPR.1993.341109}}
+
+
+
+
+% HERE: Look this up.
+
+%%%
+% Early Work (1990s) – Explicit feature extraction techniques were dominant, relying on
+% handcrafted rules, edge detection, motion tracking, and heuristics.
+%
+% * Had difficulty dealing with real-world complexity like occlusion, changes in lighting, human
+%   variability in gestures.
+% * required extensive human crafting to find features that worked reasonably well.
+%
+% Early Machine Learning (2000s-2010s):
+% * Hidden Markov Models
+% * Support Vector Machines
+%
+% Deep Learning (2010s-now)
+%  * CNNs, RNNs/LSTMs, Transformers.
+%  * end-to-end learning instead of manual feature extraction.
+%%
+
+
+% Non-ML, Vision-based
+%
+% This is one of the earliest works I found on recognizing human gestures.
+% It uses human gestures like pointing or beckoning to indicate directions to device.
+% It is vision based.
+%
+% Torige, A., and Kono, T., "Human-Interface by Recognition of Human Gesture with Image
+% Processing Recognition of Gesture to Sepcify Moving Direction", (1992), IEEE Workshop
+% on Robot and Human Communication, pp. 105-110.
+@inproceedings{Torige1992,
+  author    = {A. Torige and T. Kono},
+  title     = {Human-Interface by Recognition of Human Gesture with Image Processing: Recognition of Gesture to Specify Moving Direction},
+  booktitle = {Proceedings of the IEEE Workshop on Robot and Human Communication},
+  year      = {1992},
+  pages     = {105--110}
+}
+
+% Non-ML, Vision-based
+%
+% Another very early work on vision-based gesture recognition.  Focues on
+% hand-shapre recognition (contours and features) to classify hand gestures.
+% It is an early attempt to provide gesture-based input without requiring
+% gloves.
+%
+% Ishibuchi, K., Takemura, H., and Kishino, F., "Real-Time Hand Shape Recobnition using
+% Pipe-line Image Processor", (1992) IEEE Workshop on Robot and Human Communication, pp.
+% 111-116.
+@inproceedings{Ishibuchi1992,
+  author    = {K. Ishibuchi and H. Takemura and F. Kishino},
+  title     = {Real-Time Hand Shape Recognition Using Pipeline Image Processor},
+  booktitle = {IEEE Workshop on Robot and Human Communication},
+  year      = {1992},
+  pages     = {111--116}
+}
+
+
+% Non-ML, Vision-based
+%
+% Another rarly paper on using computer vision to recognize gestures.
+%
+% Considers the use of motion parallel (objects close appear to move faster across the
+% field of view, objects farther away slower) as a depth perception cue in recognizing
+% hand gestures.
+%
+% Cipolla, R., Okamoto, Y., and Kuno, Y., "Qualitative visual interpretation of 3D
+% hand gestures using motion parallax", (1992) IAPR Workshop on Machine Vision Applications.
+@inproceedings{Cipolla1992,
+  author    = {Roberto Cipolla and Yoshiyuki Okamoto and Yoshiaki Kuno},
+  title     = {Qualitative Visual Interpretation of 3D Hand Gestures using Motion Parallax},
+  booktitle = {IAPR Workshop on Machine Vision Applications},
+  year      = {1992},
+  pages     = {25--28},
+}
+
+
+% Freeman, W. T., & Weissman, C. D. (1995). Television
+% Control by Hand Gestures. IEEE Intl. Wkshp. on Automatic
+% Face and Gesture Recognition.
+%
+% * seems to be the first paper to use gestures to control a TV.
+% * very early work on the subject
+% * computer-vision-based
+% * used open-hand facing camera.  By moving hand, the user could interact with controls.
+
+@inproceedings{Freeman1995,
+  author    = {William T. Freeman and Craig D. Weissman},
+  title     = {Television Control by Hand Gestures},
+  booktitle = {IEEE International Workshop on Automatic Face and Gesture Recognition},
+  year      = {1995},
+  pages     = {179--183},
+  publisher = {IEEE},
+} 
+
+
+% Hummels, C. & Stapers, P. J. (1998). Meaningful gestures
+% for human computer interaction. Proc. of the 3rd IEEE
+% International Conference on Automatic Face and Gesture Recognition
+% https://ieeexplore-ieee-org.umiss.idm.oclc.org/document/671012
+%
+%  "The open hand gestures was found to be somewhat tiring for extended
+%  viewing."  This may have spelt the beginning of the end right near the start
+%  for gesture control.
+@inproceedings{Hummels1995,
+  author    = {Caroline Hummels and Pieter Jan Stappers},
+  title     = {The Use of Hand Gestures in a Design Environment},
+  booktitle = {Conference Companion on Human Factors in Computing Systems (CHI '95)},
+  year      = {1995},
+  pages     = {400--401},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  doi       = {10.1145/223355.223782},
+  url       = {https://dl.acm.org/doi/10.1145/223355.223782}
+}
+
+
+% Is this an argument for spatial awareness?
+%
+% Jetter, H.-Christian, Gerken, J., & Reiterer, H. (2010).
+% Natural User Interfaces : Why We Need Better Model-
+% Worlds, Not Better Gestures. Natural user interfaces: the
+% prospect and challenge of touch and gestural computing
+% (Workshop CHI 2010) (pp. 1-4).
+
+
+
+% E
+% Early ML statistical approach
+%
+% Represents a shift from rule-based approaches to statistical modeling techniques.
+%
+% Use Hidden Markov Models.  HMM models statistical variations enabling the system to
+% handle variability in gesture speed and differences in movement.
+%
+% Built a training and recognition pipeline.
+%
+% File: 2000-Turk-FG_FSM.pdf
+@inproceedings{Hong2000,
+  author    = {Pengyu Hong and Matthew Turk and Thomas S. Huang},
+  title     = {Gesture Modeling and Recognition Using Finite State Machines},
+  booktitle = {Proceedings of the 4th IEEE International Conference on Automatic Face and Gesture Recognition},
+  year      = {2000},
+  pages     = {410--415},
+  doi       = {10.1109/AFGR.2000.840667},
+  url       = {https://doi.org/10.1109/AFGR.2000.840667}
+}
