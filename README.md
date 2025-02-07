@@ -164,8 +164,8 @@ to join the same network as the media device.
 
 ## Terminology
 
-* Sandbox Reachable Service: a network service designed to be discovered
-by and to communicate with sandboxed applications.
+* Fling Service (a.k.a., Sandbox Reachable Service): a network service designed
+to be discovered by and to communicate with sandboxed applications.
 
 * Sandbox Reachable Services 1: system that enables communications between
 a sandboxed application and nodes on the same network.
@@ -181,16 +181,17 @@ similar as to induce oscillations in the antenna(s) on the
 * Sandboxed Application: a web page or mobile app that run in a web or
 web-like security sandbox.
 
-* Sandboxed Initiator Beacon (a.k.a., beacon): a piece of javascript
-(or app code) that operates within a sandboxed application to make its
-presence known to nearby unsandboxed beacon detectors.  Because beacon
-is sandboxed, it can only perform operations that available to sandboxed
-applications.  At the very least, a sandboxed application can force
-DNS queries, download small files, open connections to a variety of IP
-addresses.  The operations performed by the beacon establish a low bitrate
-covert channel that can be detected by unsandboxed beacon detectors.
+* Fling Initiator Beacon (a.k.a., Sandboxed Initiator Beacon, beacon):
+a piece of javascript (or app code) that operates within a sandboxed
+application to make its presence known to nearby unsandboxed beacon
+detectors.  Because beacon is sandboxed, it can only perform
+operations that available to sandboxed applications.  At the very
+least, a sandboxed application can force DNS queries, download small
+files, open connections to a variety of IP addresses.  The operations
+performed by the beacon establish a low bitrate covert channel that
+can be detected by unsandboxed beacon detectors.
 
-* Unsandboxed Beacon Detector (a.k.a., beacon detector): a
+* Fling Beacon Detector (a.k.a., unsandboxed beacon detector, beacon detector): a
 beacon detector runs as part of sandbox-reachable services on the
 device offering one or more services to sandboxed applications.
 As implied by the title, the beacon detector is not subject to the limitations
