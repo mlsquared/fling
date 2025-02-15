@@ -1,0 +1,67 @@
+% To compile this, do the following:
+%
+%   pdflatex ex.tex
+%   bibtex ex
+%   pdflatex ex.tex
+
+
+\documentclass[conference]{IEEEtran} % IEEE conference format
+
+\usepackage{cite}       % Citation management
+\usepackage{graphicx}   % For figures
+\usepackage{amsmath,amssymb} % For math symbols
+\usepackage{hyperref}   % For hyperlinks
+\usepackage{lipsum}     % For Lorem Ipsum text
+
+\begin{document}
+
+\title{Bubbleditty: A Low-Energy FTL Spacetime Warp Engine Powered by a Lead-Acid Battery}
+
+\author{
+    \IEEEauthorblockN{Ricard Oppenstein}
+    \IEEEauthorblockA{
+        Department of Warp Field Engineering \\
+        Institute for Temporal Dynamics \\
+        Email: ricard.oppenstein@itd.edu
+    }
+    \and
+    \IEEEauthorblockN{Maria Anning Meitner}
+    \IEEEauthorblockA{
+        Division of Exotic Propulsion \\
+        University of Quantum Paleontology \\
+        Email: maria.meitner@uqp.edu
+    }
+}
+\maketitle
+
+\begin{abstract}
+    \lipsum[1] % Placeholder text for abstract
+\end{abstract}
+
+\section{Introduction}
+Example introduction...  Faster-than-light (FTL) travel has been a cornerstone of science fiction for decades. However, recent studies\cite{Pu2013_WiSee} suggest that spacetime distortions could allow for such travel within the framework of general relativity. We propose a novel, low-energy approach utilizing a conventional lead-acid battery.
+
+\section{Experimental Setup}
+We use a 12V lead-acid battery to power a miniature warp coil. The system consists of:
+\begin{itemize}
+    \item A superconducting ring of exotic matter.
+    \item A flux capacitor to stabilize spacetime perturbations.
+    \item A small-scale prototype tested within a controlled vacuum environment.
+\end{itemize}
+
+\section{Results}
+Preliminary simulations indicate that a properly tuned lead-acid battery could sustain a localized warp effect for 42 milliseconds before thermal dissipation.
+
+\section{Conclusion}
+This paper outlines a theoretical framework for an FTL engine powered by everyday lead-acid batteries. Further research is required to confirm practical feasibility.
+
+\section*{Acknowledgments}
+The authors would like to thank the Institute for Exotic Engineering for funding this study.
+
+\bibliographystyle{IEEEtran}
+\bibliography{../papers/fling.bib} % Bibliography file name
+
+\end{document}
+
+
+
