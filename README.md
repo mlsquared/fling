@@ -6,7 +6,7 @@ Compile this into a pdf using
 -->
 
 
-# Fling
+# Fling and Sassy
 
 
 >  It just works...except when it shouldn't.
@@ -94,12 +94,44 @@ not exist when Fling was first introduced.
 
 David Harrison holds several patents for sandbox reachable services.
 
-## Sandbox-Reachable Services 2
+## Sassy
 
-SRS 2 and by extension Fling 2 changes the problem.  We want to fling
-even when the mobile device and the media device are NOT on the same
-network, but when the mobile device and the media device are in
-proximity to each other or in the same room.
+SASsy refers to Spatially-Aware Services.  It is a reimagining of
+Sandbox-Reachable Services (SRS) that mostly existed to allow web sites,
+and mobile apps to communciate with services from within the same network
+when opeprating wihtin the constraints of a web or mobile security sandbox.
+While this did allow us to introduce the first version of fling to
+Vizio TVs in a way that allowed it to work with existing browsers and
+mobile sandboxes, it seemed more like a work-around then an attempt
+to improve security.
+
+SASsy allows services without joining.  Meaning, it is unnecessary
+to join a network to access the services.  Why?  Because joinnig a
+network exposes all services offered by a device to devices on the
+same network.  Joining exposes a potentially substantial attack surface.
+
+With SASsy, the initiating device generates a beacon, an initiator
+beacon, that is one-way.  The initiator beacon is like blinking
+a flash light.  It could be as simple as having a device start
+and stop communicating in any frequency band that can be
+detected by a nearby beacon detector.   This is achievable with
+a wide range of technologies and generally does not require
+the beacon detector to decrypt any communications from the
+beacon initiator.  Because the communication is one-way,
+it exposes no receiver attack surface on the initiator device.
+
+The beacon needs only communicate an ephemeral public key that
+lasts for a single session and an Internet relay identifier.
+With the assumption that the initiator beacon and beacon
+detector have Itnernet access, the specified relay can handle
+all further communication using the public key as a session
+identifier.
+
+With SASsy, only the specific service(s) being offered by
+the beacon detector need be exported via the relay and the
+initiator devicde need only expose a client interface via the
+relay.  As such the system exopses an attack surface
+composed of the the mininmum number of interfaces. 
 
 Consider the Joe and Bob example:
 
@@ -115,7 +147,8 @@ based on upper harmonics from Joe's cell antenna.
 
 Even devices using different technology may introduce noise on nearby antennas.
 This "noise" may be low energy and only suitable for low bitrate
-communications.  However, it could be used to communicate a token.
+communications.  However, it could be used to communicate a token (e.g.,
+the aforementioned ephemeral public key).
 
 Joe's cell phone has cell data enabling moderately high bitrate Internet
 access.
@@ -132,56 +165,51 @@ as the relay for further communications between Joe's cell phone and Bob's TV.
 Once communications is established via the relay, Joe's can communicate at
 higher bitrate to Bob's TV in order to make API calls such as "play this URL."
 
-## Promiscuous Services
+When I first mention SASsy to people including security experts their
+first response so far has been to object to allowing communications between
+devices that are not on the same network, I submit that the network
+access model is itself far from secure, especially in the modern mobile
+world.  Unless network adminstrators exercise strict security hygience,
+any devices connecting to a network could be attackers.  This is less of
+a problem if those engaging in communications choose to not join a network
+unless latency or bandwidth constraints demand it and instead rely on
+end-to-end encryption and minimizing attack surface.
 
-SRS is promiscuous.  *Fling* is a double entendre in the same mode.
-
-SRS is promiscuous in that makes services available with zero prior
-affiliation the service and the requstor and it does so without
-requiring any exchange of any form of identification.  This does not
-make sense for many types of services, but it does not have to.  Do
-not use promiscuous services if they are inappropriate.  Promiscuous
-services may be promiscuous, but this does not imply lack of consent.
-The device offering the service does so intentionally.  The device
-communicating with the service does so intentionally.
-
-This does not mean that the two parties consent without information.
-Promiscuous services may still make decisions based on policy.  Policy
-decisions may be made based on policy inputs that are inferred rather
-than explicitly provided by the user.  Such policy inputs may include
+Avoiding the requirement of joining a network to access services does
+not mean that the two parties consent without information.  SASsy
+services may still make decisions based on policy.  Policy decisions
+may be made based on policy inputs that are inferred rather than
+explicitly provided by the user.  Such policy inputs may include
 inferring proximity between the two parties, or inferring relative
-location or inferring the presence of intervening walls.
+location or inferring the presence of intervening walls.  We submit
+that policy inputs like "in the same room," "in the same apartment,"
+"on the same floor," and "in the same building" are much closer to the
+way people think about access control than "on the same WiFi network."
+How many people are really aware of the range in which people can see
+their WiFi networks.
 
-
-The proxies require
-some means for inferring said proxies.  We could use a camera or
-microphone to enable proximity detection, but cameras and microphones
-are often deemed as too intrusive.  For Sandbox Reachable Services
-we rely on EM emissions that are normally generated by mobile devices
-in order to enable communications without requiring the mobile device
-to join the same network as the media device.
-
+With SASsy we intend to explore a variety of techniques for a
+device build spatial awareness including triangulation and
+potentially inverse scattering of WiFi and cellular EM emissions.
 
 ## Terminology
 
-* Fling Service (a.k.a., Sandbox Reachable Service): a network service designed
-to be discovered by and to communicate with sandboxed applications.
+* Sandbox Reachable Service: an older architecture invented by
+David Harrison and used to implement Fling 1.0.  It was deployed
+in all Vizio television circa 2010.
 
-* Sandbox Reachable Services 1: system that enables communications between
-a sandboxed application and nodes on the same network.
+* SASsy (a.k.a., Sassy): Spatially Aware Services.  An architecture
+that uses spatial awareness rather than network boundaries as
+policy inputs when making security-related policy decisions including
+access control decisions.
 
-* Sandbox Reachable Services 2: system that enables communications
-between a sandboxed application and nodes running sandbox reachable
-services in physical proximity to the node running the sandboxed
-application.  The device running the sandboxed application and the
-media device do not have to be on the same network, but they must
-communicate using electromagnetic emissions that are sufficiently
-similar as to induce oscillations in the antenna(s) on the
+* Sassy Service: a service that makes itself available to devices
+with an authorized spatially defined area in proximity to the service.
 
 * Sandboxed Application: a web page or mobile app that run in a web or
 web-like security sandbox.
 
-* Fling Initiator Beacon (a.k.a., Sandboxed Initiator Beacon, beacon):
+* Sassy Initiator Beacon (a.k.a., Initiator Beacon, beacon):
 a piece of javascript (or app code) that operates within a sandboxed
 application to make its presence known to nearby unsandboxed beacon
 detectors.  Because beacon is sandboxed, it can only perform
@@ -191,14 +219,13 @@ files, open connections to a variety of IP addresses.  The operations
 performed by the beacon establish a low bitrate covert channel that
 can be detected by unsandboxed beacon detectors.
 
-* Fling Beacon Detector (a.k.a., unsandboxed beacon detector, beacon detector): a
-beacon detector runs as part of sandbox-reachable services on the
-device offering one or more services to sandboxed applications.
-As implied by the title, the beacon detector is not subject to the limitations
-of a web or web-like security sandbox.  In fact, an unsandboxed
-beacon detector has low level (device-driver level) access to the
-antenna(s) on the media device.  We can upgrade the media device
-running the unsandboxed beacon detector to increase the range of devices
-it can detect, though the idea is to try to enable beacon detection
-using only software, machine learning, and a wifi-antenna.
+* Sassy Beacon Detector (a.k.a., beacon detector): a beacon detector
+runs as part of Sassy on the device offering one or more services to
+Sassy clients.  A Sassy beacon detector has sufficient access to
+interpret sassy beacons which presumably includes low level
+(device-driver level) access to the antenna(s) on the media device.
+We can upgrade the media device running the Sassy beacon
+detector to increase the range of devices it can detect, though the
+idea is to try to enable beacon detection using only software, machine
+learning, and a wifi-antenna.
 
