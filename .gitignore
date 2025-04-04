@@ -11,6 +11,28 @@ __pycache__/
 # C extensions
 *.so
 
+# golang extensions
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build artifacts
+*.test
+*.out
+
+# Go workspace file (Go 1.18+)
+go.work
+go.work.sum
+
+# Dependency management
+vendor/
+
+# Go coverage profiles
+*.coverprofile
+
 # Distribution / packaging
 .Python
 build/
@@ -169,4 +191,20 @@ cython_debug/
 *.bbl
 *.blg
 *.out
+
+# Pyright (Python language server from Microsoft)
+.pyright/
+
+# VSCode settings
+.vscode/
+
+# Docker
+*.container
+*.log
+docker-compose.override.yml
+
+# Logs and temporary runtime files
+*.log
+*.pid
+*.tmp
 
