@@ -9,8 +9,8 @@ Methods for modulating packets.
    how QUIC determines packet lenghts?   In oarticular does it
    send bytes right away?  If so then we might be able to modulate
    packet length performing separate writes to QUIC, but how would
-   one do that from within a web page using Javascript?  Can the client
-   know if QUIC is supported by the browser?  Can the client know if
+   one do that from within a web page using Javascript?  Can the web
+   page know if QUIC is supported by the browser?  Can the web page know if
    QUIC is being used?  Can the client select to use QUIC? 
  
 2. Investigate whether WebRTC can be used to modulate packet length.  Write
