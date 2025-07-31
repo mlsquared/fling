@@ -1,7 +1,6 @@
-## Homework 5
+## Homework 5: Wireshark and Length Modulation
 
 Methods for modulating packets.
-
 
 1. Investigate whether QUIC can be used to modulate packet length.  Create web page
    that trieTest on real network.
