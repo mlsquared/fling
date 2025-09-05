@@ -10,7 +10,11 @@
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/applications-module.h"
+#include "ns3/command-line.h"
+#include "ns3/simulator.h"
+#include "ns3/core-module.h"
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -18,18 +22,56 @@
 #include <cstdlib>
 #include <bitset>
 #include <queue>
+#include <filesystem>
+#include <chrono>
+#include <iomanip>
+
+double g_duration = 10.0;
+std::string g_outBase = "plm_output";
+std::string g_runTag = "";
+static std::string g_outDir;
 
 using namespace ns3;
+namespace fs = std::filesystem;
+
+static std::string
+MakeTimeStampedOutDir(const std::string& base, const std::string& tag)
+{
+  auto now = std::chrono::system_clock::now();
+  std::time_t t = std::chrono::system_clock::to_time_t(now);
+  std::tm tm{};
+#if defined(_WIN32)
+  localtime_s(&tm, &t);
+#else
+  localtime_r(&t, &tm);
+#endif
+  std::ostringstream ts;
+  ts << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
+  if (!tag.empty()) ts << "_" << tag;
+
+  fs::path dir = fs::path(base) / ts.str();
+  fs::create_directories(dir);
+  return dir.string();
+}
+
+static void
+WriteRunMeta(const std::string& outDir)
+{
+  std::ofstream meta(outDir + "/run_meta.txt", std::ios::out | std::ios::trunc);
+  if (!meta) return;
+  meta << "duration=" << g_duration << "\n";
+  // (Add other flags later if you want)
+}
+
+
 
 NS_LOG_COMPONENT_DEFINE("PacketLengthModulationWithIndexCycle");
 
-static std::ofstream g_txLog("tx_sent.txt", std::ios::out);
-static std::ofstream g_rxLog("rx_received.txt", std::ios::out);
-static std::ofstream g_decodeLog("decoded_summary.txt", std::ios::out); 
-
-std::ofstream g_txTraffic("tx_traffic.txt", std::ios::out);
-std::ofstream g_rxTraffic("rx_traffic.txt", std::ios::out);
-
+static std::ofstream g_txLog;
+static std::ofstream g_rxLog;
+static std::ofstream g_decodeLog;
+static std::ofstream g_txTraffic;
+static std::ofstream g_rxTraffic;
 
 enum ReceiverState {
   RECEIVER_IDLE,
@@ -437,11 +479,53 @@ void ScheduleBackgroundTraffic(Ptr<Node> node, const std::vector<PacketInfo> &pa
     }
 }
 
+static void StampLogHeader(std::ofstream& f, const char* name) {
+  if (!f) return;
+  f << "# " << name << "\n";
+  f << "# duration_requested_s=" << g_duration << "\n";
+  f << "# start_now_s=" << ns3::Simulator::Now().GetSeconds() << "\n";
+  f << "# -----------------------------------------\n";
+  f.flush();
+}
+
+
 int main(int argc, char* argv[])
 {
     Time::SetResolution(Time::NS);
     LogComponentEnable("PacketLengthModulationWithIndexCycle", LOG_LEVEL_INFO);
     LogComponentEnable("PacketSink", LOG_LEVEL_INFO);
+
+    ns3::CommandLine cmd;
+    cmd.AddValue("duration", "Total application run time in seconds", g_duration);
+    cmd.AddValue("outBase",  "Base folder for outputs (default: plm_output)", g_outBase);
+    cmd.AddValue("tag",      "Optional suffix for this run's folder name",    g_runTag);
+    cmd.Parse(argc, argv);
+
+    if (g_duration <= 0.0)
+    {
+      NS_FATAL_ERROR("duration must be > 0 seconds");
+    }
+
+    if (g_duration <= 0.0) {
+      NS_FATAL_ERROR("duration must be > 0 seconds");
+    }
+
+    // Create timestamped folder and write meta
+    g_outDir = MakeTimeStampedOutDir(g_outBase, g_runTag);
+    std::cout << "[plm] Output directory: " << g_outDir << std::endl;
+    WriteRunMeta(g_outDir);
+
+    // Open your existing logs *inside this folder*, keeping the same filenames
+    g_txLog.open( (fs::path(g_outDir) / "tx_sent.txt").string(), std::ios::out | std::ios::trunc );
+    StampLogHeader(g_txLog, "TX Sent Log");
+    g_rxLog.open( (fs::path(g_outDir) / "rx_received.txt").string(), std::ios::out | std::ios::trunc );
+    StampLogHeader(g_rxLog, "RX Sent Log");
+    g_decodeLog.open( (fs::path(g_outDir) / "decoded_summary.txt").string(), std::ios::out | std::ios::trunc );
+    StampLogHeader(g_decodeLog, "Decoded Summary");
+    g_txTraffic.open( (fs::path(g_outDir) / "tx_traffic.txt").string(), std::ios::out | std::ios::trunc );
+    StampLogHeader(g_txTraffic, "TX Trafiic");
+    g_rxTraffic.open( (fs::path(g_outDir) / "rx_traffic.txt").string(), std::ios::out | std::ios::trunc );
+    StampLogHeader(g_rxTraffic, "RX Traffic");
 
     NodeContainer nodes;
     nodes.Create(2);
@@ -488,13 +572,13 @@ int main(int argc, char* argv[])
     modApp->Setup(remote, codeIntervalSeconds);
     nodes.Get(0)->AddApplication(modApp);
     modApp->SetStartTime(Seconds(0.1));
-    modApp->SetStopTime(Seconds(2500.0));
+    modApp->SetStopTime(Seconds(g_duration));
 
     PacketSinkHelper sinkHelper("ns3::UdpSocketFactory",
                                 InetSocketAddress(Ipv4Address::GetAny(),8081));
     ApplicationContainer sinks = sinkHelper.Install(nodes.Get(1));
     sinks.Start(Seconds(0.0));
-    sinks.Stop(Seconds(2500.0));
+    sinks.Stop(Seconds(g_duration));
 
     Config::ConnectWithoutContext("/NodeList/1/ApplicationList/*/$ns3::PacketSink/Rx", MakeCallback(&RxCallback));
 
@@ -515,8 +599,21 @@ int main(int argc, char* argv[])
     {
         ScheduleBackgroundTraffic(bgNodes.Get(i), packetInfos, remoteAddressBackground);
     }
-    Simulator::Stop(Seconds(2500.0));
+    Simulator::Stop(Seconds(g_duration+1.0));
     Simulator::Run();
+
+    double sim_end = ns3::Simulator::Now().GetSeconds();
+    auto stampEnd = [&](std::ofstream& f){
+      if (f) {
+        f << "\n# -----------------------------------------\n";
+        f << "# sim_end_time_s=" << sim_end << "\n";
+        f << "# duration_requested_s=" << g_duration << "\n";
+        f.flush();
+      }
+    };
+    stampEnd(g_txLog); stampEnd(g_rxLog); stampEnd(g_decodeLog);
+    stampEnd(g_txTraffic); stampEnd(g_rxTraffic);
+
     Simulator::Destroy();
 
     if(g_txLog.is_open()) g_txLog.close();
